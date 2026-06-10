@@ -89,7 +89,7 @@ WORKDIR $APP_HOME
 COPY . $APP_HOME
 
 # install dependencies
-RUN sed -i 's/^Components: .*/& contrib non-free/' /etc/apt/sources.list.d/debian.sources || sed -i 's/ main$/ main contrib non-free/' /etc/apt/sources.list \ && apt-get update && apt-get install -y --no-install-recommends nginx fuse3 libfuse3-dev p7zip-full dmg2img libfsapfs-utils sleuthkit libmagic1t64 hfsprogs bzip2
+RUN sed -i 's/^Components: .*/& contrib non-free/' /etc/apt/sources.list.d/debian.sources || sed -i 's/ main$/ main contrib non-free/' /etc/apt/sources.list \ && apt-get update && apt-get install -y --no-install-recommends nginx fuse3 libfuse3-dev p7zip-full dmg2img libfsapfs-utils sleuthkit libmagic1t64 hfsprogs bzip2 libpq5 && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/src/app/wheels /wheels
 RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*
@@ -108,7 +108,9 @@ RUN python manage.py collectstatic --noinput
 RUN chown -R app:app $APP_HOME
 RUN chown -R app:app /munkirepo
 RUN chown -R app:app /munkitools
-
+RUN chown -R app:app /var/lib/nginx
+RUN chown -R app:app /var/log/nginx
+RUN chown -R app:app /etc/nginx
 # change to the app user
 USER app
 

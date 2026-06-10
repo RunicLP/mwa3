@@ -111,6 +111,10 @@ RUN chown -R app:app /munkitools
 RUN chown -R app:app /var/lib/nginx
 RUN chown -R app:app /var/log/nginx
 RUN chown -R app:app /etc/nginx
+
+# redirect the Nginx PID file to a user-writable directory
+RUN sed -i 's|/run/nginx.pid|/tmp/nginx.pid|g' /etc/nginx/nginx.conf
+
 # change to the app user
 USER app
 

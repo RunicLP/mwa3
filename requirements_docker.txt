@@ -12,3 +12,4 @@ django-auth-ldap==4.8.0
 azure-storage-blob==12.28.0
 whitenoise==6.9.0
 Pillow==12.1.1
+python-magic==0.4.27

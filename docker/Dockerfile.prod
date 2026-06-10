@@ -10,7 +10,8 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # install system dependencies
-RUN apt-get update \
+RUN sed -i 's/Components: main/Components: main contrib non-free/g' /etc/apt/sources.list.d/debian.sources || sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
+    && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
     gcc \
@@ -40,7 +41,7 @@ RUN apt-get update \
     dmg2img \
     libfsapfs-utils \
     sleuthkit \
-    libmagic1 \
+    libmagic1t64 \
     hfsprogs \
     bzip2 \
     && rm -rf /var/lib/apt/lists/*
@@ -88,7 +89,7 @@ WORKDIR $APP_HOME
 COPY . $APP_HOME
 
 # install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends nginx fuse3 libfuse3-dev p7zip-full dmg2img libfsapfs-utils sleuthkit libmagic1 hfsprogs bzip2
+RUN apt-get update && apt-get install -y --no-install-recommends nginx fuse3 libfuse3-dev p7zip-full dmg2img libfsapfs-utils sleuthkit libmagic1t64 hfsprogs bzip2
 COPY --from=builder /usr/src/app/wheels /wheels
 RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*

@@ -119,4 +119,4 @@ VOLUME [ "/munkirepo" ]
 
 # run entrypoint.prod.sh
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
-EXPOSE 80
+EXPOSE 8080

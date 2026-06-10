@@ -105,7 +105,7 @@ RUN mkdir $APP_HOME/staticfiles
 RUN python manage.py collectstatic --noinput
 
 # chown all the files to the app user
-RUN chown -R app:app $APP_HOME
+RUN chown -R app:app /home/app
 RUN chown -R app:app /munkirepo
 RUN chown -R app:app /munkitools
 RUN chown -R app:app /var/lib/nginx

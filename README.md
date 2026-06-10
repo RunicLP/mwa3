@@ -21,13 +21,13 @@ MunkiWebAdmin 3 (MWA3) is a modern, Django-based web administration tool for [Mu
 
 ### Docker (Recommended)
 
-1. Clone the repository:
+1. Download docker-compose.yml:
 ```bash
-git clone https://github.com/SteveKueng/munkiwebadmin.git
-cd munkiwebadmin
+cd [WorkDir]
+curl -o https://raw.githubusercontent.com/RunicLP/mwa3/refs/heads/main/docker/docker-compose.yml
 ```
 
-2. Create a `.env` file with your configuration:
+2. Create `.env` file or download the template:
 ```bash
 SECRET_KEY=your-secure-secret-key-here
 DB=postgres
@@ -38,14 +38,23 @@ DB_HOST=db
 DB_PORT=5432
 ALLOWED_HOSTS=localhost 127.0.0.1
 ```
+```bash
+curl -o .env https://raw.githubusercontent.com/RunicLP/mwa3/refs/heads/main/docker/.env
+``` 
 
-3. Start with Docker Compose:
+3. Edit Volume in docker-compose.yml
+```bash
+volumes:
+- <munki_repo/path>:/munkirepo
+```
+
+5. Start with Docker Compose:
 ```bash
 cd docker
 docker compose -f docker-compose.prod.yml up -d
 ```
 
-4. Access at `http://localhost:80`
+6. Access at `http://localhost:80`
 
 ### Manual Installation
 

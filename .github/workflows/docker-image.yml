@@ -43,5 +43,5 @@ jobs:
           file: ./docker/Dockerfile
           push: true
           tags: |
-            ${{ env.GHCR_REGISTRY }}/${{ GITHUB_ENV }}:latest
+            ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ secrets.DOCKER_USERNAME }}/mwa3:latest

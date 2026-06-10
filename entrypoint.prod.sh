@@ -13,7 +13,7 @@ if [ "$AZURE_STORAGE_BLOB_ENDPOINT" != "" ]; then
   blobfuse2 mount /munkirepo/
 fi
 
-if [ "$DATABASE" == "postgres" ]; then
+if [ "$DATABASE" = "postgres" ]; then
     echo "Waiting for postgres..."
 
     while ! nc -z $SQL_HOST $SQL_PORT; do
